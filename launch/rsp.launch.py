@@ -12,7 +12,6 @@ import xacro
 
 def generate_launch_description():
 
-    # Check if we're told to use sim time
     use_sim_time = LaunchConfiguration('use_sim_time')
     use_ros2_control = LaunchConfiguration('use_ros2_control')
 
@@ -22,7 +21,6 @@ def generate_launch_description():
     # robot_description_config = xacro.process_file(xacro_file)
     robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
     
-    # Create a robot_state_publisher node
     params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
     node_robot_state_publisher = Node(
         package='robot_state_publisher',

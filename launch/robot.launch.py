@@ -29,6 +29,12 @@ def generate_launch_description():
                      get_package_share_directory(package_name),'launch','rplidar.launch.py'
                  )])
      )
+    
+    camera = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                     get_package_share_directory(package_name),'launch','camera.launch.py'
+                 )])
+     )
 
     twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','twist_mux.yaml')
     twist_mux = Node(
@@ -83,6 +89,7 @@ def generate_launch_description():
         rsp,
         twist_mux,
         rplidar,
+        camera,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner
